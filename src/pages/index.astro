@@ -1,0 +1,562 @@
+---
+import "../styles/global.css";
+import "../styles/hero.css";
+
+const products = [
+  {
+    number: "01",
+    title: "Style intelligence",
+    headline: "Wear the version of you that already exists.",
+    copy:
+      "Quatrons turns a mirror, a mood, and a wardrobe into confident looks that feel like you.",
+    points: [
+      "Personal context, not generic outputs",
+      "Feedback that gets sharper over time",
+      "Built around your rules"
+    ]
+  },
+  {
+    number: "02",
+    title: "Market intelligence",
+    headline: "Know what changed before everyone asks.",
+    copy:
+      "Signals from prices, headlines, and behavior become one practical read on the next move.",
+    points: [
+      "Live context from many sources",
+      "Plain-language confidence levels",
+      "Decisions with a visible trail"
+    ]
+  },
+  {
+    number: "03",
+    title: "Personal intelligence",
+    headline: "A quiet layer for every decision.",
+    copy:
+      "Questions, habits, conversations, and preferences stay connected so the answer remembers you.",
+    points: [
+      "Memory with clear permissions",
+      "Designed for daily judgment",
+      "Fast answers without the clutter"
+    ]
+  }
+];
+
+const method = [
+  ["Choose your lens", "Start with style, markets, or an open conversation. Your context travels with you."],
+  ["Set your rules", "Upload a photo, define a risk limit, or simply ask the question on your mind."],
+  ["Move with clarity", "See a realistic preview, a measured signal, or a straight answer in seconds."]
+];
+
+const questions = [
+  ["What is Quatrons?", "An adaptive intelligence layer for personal decisions across style, markets, and conversation."],
+  ["Is it one product or many?", "One system with separate lenses. Each lens keeps its own interface while sharing context."],
+  ["When can I try it?", "Early access is opening in waves. Join the list and we will invite the first users personally."]
+];
+
+const stats = [
+  ["01", "Core intelligence"],
+  ["03", "Everyday lenses"],
+  ["∞", "Rolling moves"]
+];
+
+const companyStats = [
+  ["04", "people building the company"],
+  ["₹100 cr", "revenue generated last year"],
+  ["01", "focused marketing engine"]
+];
+
+const companyNotes = [
+  [
+    "Small team, sharp ownership",
+    "Quatrons is run by four people who keep product, growth, operations, and customer learning close to the same table."
+  ],
+  [
+    "Marketing as a growth system",
+    "The company invests deliberately in marketing so the product reaches people who already feel the pain of scattered decisions."
+  ],
+  [
+    "Revenue with a clear signal",
+    "Last year, Quatrons generated ₹100 crore in revenue by keeping the product simple, useful, and easy to explain."
+  ]
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Quatrons is an adaptive intelligence layer for style, markets, and personal decision-making."
+    />
+    <script is:inline>
+      const savedTheme = localStorage.getItem("quatrons-theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      if (savedTheme === "light" || savedTheme === "dark") {
+        document.documentElement.dataset.theme = savedTheme;
+      } else {
+        document.documentElement.dataset.theme = systemTheme;
+      }
+      document.documentElement.dataset.themePreference = savedTheme || "system";
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Quatrons | Make Your Next Move Obvious</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header" aria-label="Primary navigation">
+        <nav class="site-nav">
+          <div class="site-nav-inner">
+            <a class="brand" href="#top" aria-label="Quatrons home">
+              <span>Quatrons</span>
+              <span class="brand-tm">TM</span>
+            </a>
+            <div class="nav-links" aria-label="Site sections">
+              <a href="#products">Products</a>
+              <a href="#signal-lab">Signal lab</a>
+              <a href="#company">Company</a>
+              <a href="#method">Method</a>
+              <a href="#faq">FAQ</a>
+            </div>
+            <div class="header-actions">
+              <a class="sign-in" href="mailto:hello@quatrons.com">Sign in</a>
+              <a class="pill-button" href="mailto:hello@quatrons.com">
+                Join early access
+              </a>
+            </div>
+            <button class="mobile-menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </nav>
+        <div class="mobile-menu" aria-hidden="true">
+          <div class="mobile-menu-links">
+            <a href="#products">Products</a>
+            <a href="#signal-lab">Signal lab</a>
+            <a href="#company">Company</a>
+            <a href="#method">Method</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div class="mobile-menu-actions">
+            <a class="ghost-button" href="mailto:hello@quatrons.com">Sign in</a>
+            <a class="pill-button large" href="mailto:hello@quatrons.com">Join early access</a>
+          </div>
+        </div>
+      </header>
+
+      <nav class="scroll-rail" aria-label="Page progress">
+        <a href="#top" data-scroll-link="top"><span></span>Hero</a>
+        <a href="#products" data-scroll-link="products"><span></span>Products</a>
+        <a href="#signal-lab" data-scroll-link="signal-lab"><span></span>Signal lab</a>
+        <a href="#company" data-scroll-link="company"><span></span>Company</a>
+        <a href="#method" data-scroll-link="method"><span></span>Method</a>
+      </nav>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <!-- sphere sits behind the copy, flush under the header -->
+          <div class="signal-stage" aria-label="Animated Quatrons signal field">
+            <div class="sphere-wrap" aria-hidden="true">
+              <canvas class="signal-canvas" data-signal-canvas></canvas>
+            </div>
+          </div>
+
+          <div class="hero-copy">
+            <div class="motion-guide motion-guide-hero" aria-hidden="true">
+              <span>Scroll</span>
+              <b></b>
+            </div>
+            <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>A new kind of personal intelligence</p>
+            <h1 id="hero-title">
+              <span class="line">Make your next</span>
+              <span class="line line-underlined">move <span class="word-reveal">obvious.</span></span>
+            </h1>
+
+            <div class="hero-row">
+              <p class="lede">
+                Quatrons brings style, markets, and conversation into one adaptive intelligence
+                layer, designed around the person making the decision.
+              </p>
+              <div class="hero-actions">
+                <a class="pill-button large" href="mailto:hello@quatrons.com">
+                  Get early access
+                  <span aria-hidden="true">↗</span>
+                </a>
+                <a class="ghost-button" href="#products">Watch demo</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- continuous right-to-left marquee, content duplicated for a seamless loop -->
+          <div class="hero-stats-marquee" aria-label="Quatrons capabilities">
+            <div class="hero-stats-track">
+              <dl class="hero-stats-group">
+                {stats.map(([value, label]) => (
+                  <div>
+                    <dt>{value}</dt>
+                    <dd>{label}</dd>
+                  </div>
+                ))}
+              </dl>
+              <dl class="hero-stats-group" aria-hidden="true">
+                {stats.map(([value, label]) => (
+                  <div>
+                    <dt>{value}</dt>
+                    <dd>{label}</dd>
+                  </div>
+                ))}
+              </dl>
+              <dl class="hero-stats-group" aria-hidden="true">
+                {stats.map(([value, label]) => (
+                  <div>
+                    <dt>{value}</dt>
+                    <dd>{label}</dd>
+                  </div>
+                ))}
+              </dl>
+              <dl class="hero-stats-group" aria-hidden="true">
+                {stats.map(([value, label]) => (
+                  <div>
+                    <dt>{value}</dt>
+                    <dd>{label}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <div class="ticker" aria-label="Quatrons signal categories">
+          <span>Built for people who move with intent</span>
+          <span>Style</span>
+          <span>Markets</span>
+          <span>Conversation</span>
+          <span>Context</span>
+        </div>
+
+        <section class="split-intro scroll-reveal" id="products" aria-labelledby="products-title">
+          <div class="section-guide" aria-hidden="true"><span>01</span><b>Products</b></div>
+          <p class="eyebrow">One intelligence layer</p>
+          <h2 id="products-title">Different signals. One clear direction.</h2>
+          <p>
+            Most people stitch together four apps to make one decision. Quatrons replaces the
+            stitching with a living system that learns how you think.
+          </p>
+        </section>
+
+        <section class="product-panel interactive-spotlight scroll-reveal" aria-label="Quatrons intelligence products" data-spotlight>
+          <div class="product-copy">
+            <span class="step-count">01 / 03</span>
+            <p class="eyebrow">Style intelligence</p>
+            <h3>{products[0].headline}</h3>
+            <p>{products[0].copy}</p>
+            <ul>
+              {products[0].points.map((point) => <li>{point}</li>)}
+            </ul>
+          </div>
+          <div class="product-visual">
+            <div class="app-window">
+              <div class="window-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+                <small>quatrons / visual try-on</small>
+              </div>
+              <p>Visual try-on</p>
+              <strong>98.4%</strong>
+              <small>match confidence</small>
+              <div class="swatch-row">
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+          <div class="product-tabs" role="list" aria-label="Product lenses">
+            {products.map((product) => (
+              <a role="listitem" href="#products">
+                <span>{product.number}</span>
+                {product.title}
+                <b aria-hidden="true">↗</b>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section class="signal-lab interactive-spotlight scroll-reveal" id="signal-lab" aria-labelledby="signal-lab-title" data-spotlight>
+          <div class="section-guide" aria-hidden="true"><span>02</span><b>Signal lab</b></div>
+          <div class="signal-lab-copy">
+            <p class="eyebrow">Interactive signal lab</p>
+            <h2 id="signal-lab-title">Move through the map. Watch the signal answer.</h2>
+            <p>
+              A living view of how Quatrons connects style context, market movement,
+              personal memory, and marketing feedback into one decision graph.
+            </p>
+            <div class="signal-lab-actions" aria-label="Signal layers">
+              <button type="button" class="signal-chip is-active" data-network-mode="style">Style</button>
+              <button type="button" class="signal-chip" data-network-mode="markets">Markets</button>
+              <button type="button" class="signal-chip" data-network-mode="growth">Growth</button>
+            </div>
+          </div>
+          <div class="signal-lab-visual">
+            <canvas class="network-canvas" data-network-canvas></canvas>
+            <div class="signal-readout" aria-hidden="true">
+              <span>Live confidence</span>
+              <strong data-network-score>84%</strong>
+              <small>cursor weighted context</small>
+            </div>
+          </div>
+          <div class="signal-timeline" aria-label="Growth timeline">
+            <div>
+              <span>01</span>
+              <strong>Find the signal</strong>
+              <p>Audience, preference, price, and behavior come into one view.</p>
+            </div>
+            <div>
+              <span>02</span>
+              <strong>Spend with intent</strong>
+              <p>Marketing investment is routed toward the channels already moving.</p>
+            </div>
+            <div>
+              <span>03</span>
+              <strong>Compound the result</strong>
+              <p>The loop learns from every campaign, every question, and every decision.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="company-story interactive-spotlight scroll-reveal" id="company" aria-labelledby="company-title" data-spotlight>
+          <div class="section-guide" aria-hidden="true"><span>03</span><b>Company</b></div>
+          <div class="company-story-copy">
+            <p class="eyebrow">Company signal</p>
+            <h2 id="company-title">Four people. One focused engine.</h2>
+            <p>
+              Quatrons is a compact company built by four people, designed around fast
+              decisions, clear ownership, and a marketing engine that turns attention into
+              measurable growth.
+            </p>
+          </div>
+          <dl class="company-stat-grid" aria-label="Company highlights">
+            {companyStats.map(([value, label]) => (
+              <div>
+                <dt>{value}</dt>
+                <dd>{label}</dd>
+              </div>
+            ))}
+          </dl>
+          <div class="company-note-grid">
+            {companyNotes.map(([title, copy], index) => (
+              <article>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="method scroll-reveal" id="method" aria-labelledby="method-title">
+          <div class="section-guide" aria-hidden="true"><span>04</span><b>Method</b></div>
+          <p class="eyebrow">The Quatrons method</p>
+          <h2 id="method-title">From signal to shift.</h2>
+          <p>
+            The same flow powers every module: tell it what you need, set your rules,
+            and move with clarity.
+          </p>
+          <div class="method-grid">
+            {method.map(([title, copy], index) => (
+              <article>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="quote-band cta-panel-section scroll-reveal" aria-labelledby="build-title">
+          <div class="section-guide" aria-hidden="true"><span>05</span><b>Build</b></div>
+          <div class="build-cta interactive-spotlight" data-spotlight>
+            <div class="build-spotlight" aria-hidden="true"></div>
+            <div class="build-cta-inner">
+              <div class="build-copy">
+                <h2 id="build-title">
+                  Ready to build
+                  <br />
+                  something great?
+                </h2>
+                <p>
+                  Join thousands of teams shipping faster with Quatrons. Start
+                  free, scale infinitely.
+                </p>
+                <div class="build-actions">
+                  <a class="pill-button large" href="mailto:hello@quatrons.com">
+                    Start building free
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                  <a class="ghost-button" href="mailto:hello@quatrons.com">Talk to sales</a>
+                </div>
+                <p class="build-note">No credit card required</p>
+              </div>
+              <div class="build-visual" aria-hidden="true">
+                <canvas class="tetrahedron-canvas" data-tetrahedron-canvas></canvas>
+              </div>
+            </div>
+            <span class="build-corner top" aria-hidden="true"></span>
+            <span class="build-corner bottom" aria-hidden="true"></span>
+          </div>
+        </section>
+
+        <section class="proof scroll-reveal" aria-labelledby="proof-title">
+          <h2 id="proof-title">Already making better moves.</h2>
+          <div class="proof-grid">
+            <article>
+              <p>"It took a vague preference and turned it into three wearable options."</p>
+              <span>Style lens</span>
+            </article>
+            <article>
+              <p>"The market summary felt calm, not noisy. I knew exactly what mattered."</p>
+              <span>Market lens</span>
+            </article>
+            <article>
+              <p>"It remembered the decision rules I usually forget to apply."</p>
+              <span>Personal lens</span>
+            </article>
+          </div>
+        </section>
+
+        <section class="faq scroll-reveal" id="faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">Good questions. Straight answers.</h2>
+          <div class="faq-list">
+            {questions.map(([question, answer]) => (
+              <details>
+                <summary>{question}</summary>
+                <p>{answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <section class="final-cta" aria-labelledby="cta-title">
+          <p class="eyebrow">Now forming private access</p>
+          <h2 id="cta-title">Stay close to the signal.</h2>
+          <a class="pill-button large" href="mailto:hello@quatrons.com">
+            Join early access
+            <span aria-hidden="true">↗</span>
+          </a>
+        </section>
+
+        <footer class="site-footer" aria-label="Footer">
+          <div class="footer-wave" aria-hidden="true">
+            <canvas class="wave-canvas" data-wave-canvas></canvas>
+          </div>
+
+          <div class="footer-inner">
+            <div class="footer-main">
+              <div class="footer-brand-column">
+                <a class="footer-brand" href="#top" aria-label="Quatrons home">
+                  <span>Quatrons</span>
+                  <span class="brand-tm">TM</span>
+                </a>
+                <p>
+                  Adaptive intelligence for people making sharper decisions across style,
+                  markets, and everyday context.
+                </p>
+                <div class="footer-social">
+                  <a href="#">Twitter <span aria-hidden="true">↗</span></a>
+                  <a href="#">GitHub <span aria-hidden="true">↗</span></a>
+                  <a href="#">LinkedIn <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+
+              <div class="footer-column">
+                <h3>Product</h3>
+                <ul>
+                  <li><a href="#products">Products</a></li>
+                  <li><a href="#signal-lab">Signal lab</a></li>
+                  <li><a href="#company">Company</a></li>
+                  <li><a href="#method">Method</a></li>
+                  <li><a href="#faq">FAQ</a></li>
+                  <li><a href="mailto:hello@quatrons.com">Early access</a></li>
+                </ul>
+              </div>
+
+              <div class="footer-column">
+                <h3>Developers</h3>
+                <ul>
+                  <li><a href="#method">Documentation</a></li>
+                  <li><a href="#">API Reference</a></li>
+                  <li><a href="#">SDK</a></li>
+                  <li><a href="#">Status</a></li>
+                </ul>
+              </div>
+
+              <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li>
+                    <a href="#">
+                      Careers
+                      <span class="footer-badge">Hiring</span>
+                    </a>
+                  </li>
+                  <li><a href="mailto:hello@quatrons.com">Contact</a></li>
+                </ul>
+              </div>
+
+              <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                  <li><a href="#">Privacy</a></li>
+                  <li><a href="#">Terms</a></li>
+                  <li><a href="#">Security</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="footer-bottom">
+              <p>2026 Quatrons. All rights reserved.</p>
+              <div class="footer-bottom-actions">
+                <div class="theme-toggle" role="radiogroup" aria-label="Theme">
+                  <span class="theme-toggle-thumb" aria-hidden="true"></span>
+                  <button class="theme-choice" type="button" data-theme-choice="system" role="radio" aria-checked="true" aria-label="Use system theme">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <rect x="4" y="5" width="16" height="11" rx="1.5"></rect>
+                      <path d="M8 20h8M10 16v4M14 16v4"></path>
+                    </svg>
+                  </button>
+                  <button class="theme-choice" type="button" data-theme-choice="light" role="radio" aria-checked="false" aria-label="Use light theme">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <circle cx="12" cy="12" r="4"></circle>
+                      <path d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"></path>
+                    </svg>
+                  </button>
+                  <button class="theme-choice" type="button" data-theme-choice="dark" role="radio" aria-checked="false" aria-label="Use dark theme">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M20 14.5A7.5 7.5 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"></path>
+                      <path d="M18 3v4M16 5h4M21 8v3M19.5 9.5h3"></path>
+                    </svg>
+                  </button>
+                </div>
+                <span class="footer-status">
+                  <span aria-hidden="true"></span>
+                  All systems operational
+                </span>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <script src="../scripts/signal-sphere.js"></script>
+  </body>
+</html>
