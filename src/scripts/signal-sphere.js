@@ -1,3 +1,6 @@
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 const canvases = document.querySelectorAll("[data-signal-canvas]");
 const tetrahedronCanvases = document.querySelectorAll("[data-tetrahedron-canvas]");
 const waveCanvases = document.querySelectorAll("[data-wave-canvas]");
@@ -12,6 +15,8 @@ const animatedWord = document.querySelector(".word-reveal");
 const themeChoices = document.querySelectorAll("[data-theme-choice]");
 const systemThemeQuery = window.matchMedia("(prefers-color-scheme: light)");
 const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+gsap.registerPlugin(ScrollTrigger);
 
 const getCanvasRgb = () => {
   const value = getComputedStyle(document.documentElement).getPropertyValue("--canvas-rgb").trim();
@@ -112,6 +117,237 @@ if (animatedWord) {
   });
 }
 
+if (reducedMotionQuery.matches) {
+  document.querySelector("[data-splash-screen]")?.remove();
+  document.querySelectorAll(".scroll-reveal").forEach((item) => item.classList.add("is-visible"));
+  const companyGame = document.querySelector("[data-company-game]");
+  if (companyGame) {
+    companyGame.style.setProperty("--company-arc-alpha", "0.42");
+    companyGame.style.setProperty("--company-arc-scale", "1");
+    companyGame.style.setProperty("--company-core-alpha", "1");
+    companyGame.style.setProperty("--company-root-alpha", "1");
+    companyGame.querySelectorAll(".root-line").forEach((line) => {
+      line.style.strokeDashoffset = "0";
+    });
+    const proof = companyGame.querySelector(".company-game-proof");
+    if (proof) {
+      proof.style.opacity = "1";
+      proof.style.transform = "translateY(0)";
+    }
+  }
+} else {
+  const gsapContext = gsap.context(() => {
+    const splash = document.querySelector("[data-splash-screen]");
+    if (splash) {
+      const splashWord = splash.querySelector(".splash-word");
+      const brandWord = document.querySelector(".site-header .brand span:first-child");
+      const splashLetters = splash.querySelectorAll(".splash-letter");
+
+      gsap.set(".site-header .brand", { autoAlpha: 0 });
+      gsap.set(splashWord, { autoAlpha: 0 });
+      gsap.set(splashLetters, { autoAlpha: 0, y: 18, filter: "blur(14px)" });
+      gsap.set(".signal-stage", { autoAlpha: 0, xPercent: 34, scale: 0.92 });
+
+      gsap.timeline({ delay: 0.12 })
+        .fromTo(".splash-symbol", { autoAlpha: 0, scale: 0.82, filter: "blur(16px)" }, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.55, ease: "power3.out" })
+        .to(".splash-loader i", { scaleX: 1, duration: 1.05, ease: "power2.inOut" }, "-=0.1")
+        .to(".splash-symbol", { autoAlpha: 0, scale: 0.74, filter: "blur(12px)", duration: 0.34, ease: "power2.in" }, "-=0.18")
+        .set(splashWord, { autoAlpha: 1 }, "-=0.08")
+        .to(splashLetters, { autoAlpha: 1, y: 0, filter: "blur(0px)", stagger: 0.055, duration: 0.42, ease: "power3.out" }, "-=0.05")
+        .to(".splash-loader", { autoAlpha: 0, y: 8, duration: 0.28, ease: "power2.out" }, "<")
+        .to(splashWord, {
+          x: () => {
+            if (!brandWord || !splashWord) return 0;
+            const from = splashWord.getBoundingClientRect();
+            const to = brandWord.getBoundingClientRect();
+            return to.left + to.width / 2 - (from.left + from.width / 2);
+          },
+          y: () => {
+            if (!brandWord || !splashWord) return 0;
+            const from = splashWord.getBoundingClientRect();
+            const to = brandWord.getBoundingClientRect();
+            return to.top + to.height / 2 - (from.top + from.height / 2);
+          },
+          scale: () => {
+            if (!brandWord || !splashWord) return 0.28;
+            return brandWord.getBoundingClientRect().width / splashWord.getBoundingClientRect().width;
+          },
+          duration: 0.9,
+          ease: "power4.inOut"
+        }, "+=0.2")
+        .to(".site-header .brand", { autoAlpha: 1, duration: 0.12, ease: "none" }, "-=0.12")
+        .to(splashWord, { autoAlpha: 0, duration: 0.12, ease: "none" }, "<")
+        .to(splash, { autoAlpha: 0, duration: 0.36, ease: "power2.out" }, "<")
+        .fromTo(".signal-stage", { autoAlpha: 0, xPercent: 34, scale: 0.92 }, { autoAlpha: 0.4, xPercent: 0, scale: 1, duration: 1.05, ease: "power4.out" }, "-=0.05")
+        .set(splash, { display: "none" });
+    }
+
+    gsap.to("body", {
+      "--smoke-x": 36,
+      "--smoke-y": -28,
+      ease: "none",
+      scrollTrigger: {
+        start: 0,
+        end: "max",
+        scrub: 1
+      }
+    });
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: 0.9
+      }
+    })
+      .to(".hero-copy h1", { yPercent: -12, autoAlpha: 0.16, ease: "none" }, 0)
+      .to(".hero-row", { yPercent: -22, autoAlpha: 0, ease: "none" }, 0)
+      .to(".signal-stage", { xPercent: 18, scale: 1.08, autoAlpha: 0.16, ease: "none" }, 0)
+      .to(".hero-stats-marquee", { y: 70, autoAlpha: 0, ease: "none" }, 0);
+
+    const companyGame = document.querySelector("[data-company-game]");
+    if (companyGame) {
+      const introTitle = companyGame.querySelector(".company-game-intro h2");
+      const introPhrases = companyGame.querySelectorAll(".company-intro-phrase");
+      const core = companyGame.querySelector(".company-core");
+      const coreWord = companyGame.querySelector(".company-core-word");
+      const rootLines = companyGame.querySelectorAll(".root-line");
+      const roots = companyGame.querySelectorAll(".company-root");
+      const proof = companyGame.querySelector(".company-game-proof");
+      const proofItems = companyGame.querySelectorAll(".company-game-proof dt, .company-game-proof dd, .company-game-proof p");
+
+      gsap.set(companyGame, {
+        "--company-arc-alpha": 0,
+        "--company-arc-scale": 0.84,
+        "--company-core-alpha": 0,
+        "--company-root-alpha": 0
+      });
+      gsap.set(introTitle, { autoAlpha: 1 });
+      gsap.set(introPhrases, { autoAlpha: 0, yPercent: 54, filter: "blur(18px)" });
+      gsap.set(introPhrases[0], { autoAlpha: 1, yPercent: 0, filter: "blur(0px)" });
+      gsap.set(core, { autoAlpha: 0, scale: 0.94 });
+      gsap.set(coreWord, { autoAlpha: 0, scale: 0.82, filter: "blur(18px)" });
+      gsap.set(rootLines, { strokeDashoffset: 1 });
+      gsap.set(roots, { autoAlpha: 0, y: 28, filter: "blur(14px)" });
+      gsap.set(proof, { autoAlpha: 0, y: 40, scale: 0.98, filter: "blur(18px)" });
+      gsap.set(proofItems, { autoAlpha: 0, y: 26 });
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: companyGame,
+          start: "top top",
+          end: () => `+=${window.innerHeight * 3.2}`,
+          scrub: 0.9,
+          pin: companyGame,
+          pinSpacing: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      })
+        .addLabel("four")
+        .to(introPhrases[0], { autoAlpha: 0, yPercent: -62, filter: "blur(18px)", duration: 0.16, ease: "none" }, "four+=0.14")
+        .addLabel("engine")
+        .to(introPhrases[1], { autoAlpha: 1, yPercent: 0, filter: "blur(0px)", duration: 0.16, ease: "none" }, "engine")
+        .to(introPhrases[1], { autoAlpha: 0, yPercent: -62, filter: "blur(18px)", duration: 0.16, ease: "none" }, "engine+=0.2")
+        .to(introTitle, { autoAlpha: 0, duration: 0.04, ease: "none" }, "engine+=0.34")
+        .addLabel("brand")
+        .to(companyGame, { "--company-arc-alpha": 0.42, "--company-arc-scale": 1, duration: 0.22, ease: "none" }, "brand-=0.08")
+        .to(companyGame, { "--company-core-alpha": 1, duration: 0.12, ease: "none" }, "brand")
+        .to(core, { autoAlpha: 1, scale: 1, duration: 0.18, ease: "none" }, "brand")
+        .to(coreWord, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.18, ease: "none" }, "brand")
+        .addLabel("roots", "+=0.08")
+        .to(rootLines, { strokeDashoffset: 0, stagger: 0.04, duration: 0.28, ease: "none" }, "roots")
+        .to(companyGame, { "--company-root-alpha": 1, duration: 0.18, ease: "none" }, "roots+=0.04")
+        .to(roots, { autoAlpha: 1, y: 0, filter: "blur(0px)", stagger: 0.04, duration: 0.24, ease: "none" }, "roots+=0.04")
+        .addLabel("proof", "+=0.16")
+        .to(coreWord, { scale: 0.92, autoAlpha: 0.28, duration: 0.18, ease: "none" }, "proof")
+        .to(rootLines, { autoAlpha: 0.12, duration: 0.16, ease: "none" }, "proof")
+        .to(roots, { autoAlpha: 0, y: -24, filter: "blur(12px)", stagger: 0.02, duration: 0.16, ease: "none" }, "proof")
+        .to(proof, { autoAlpha: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.2, ease: "none" }, "proof+=0.08")
+        .to(proofItems, { autoAlpha: 1, y: 0, stagger: 0.04, duration: 0.18, ease: "none" }, "proof+=0.12")
+        .to(companyGame, { "--company-arc-alpha": 0.16, "--company-arc-scale": 1.14, duration: 0.24, ease: "none" }, "proof+=0.14")
+        .addLabel("out", "+=0.28")
+        .to(proof, { autoAlpha: 0, y: -46, filter: "blur(16px)", duration: 0.16, ease: "none" }, "out");
+    }
+
+    gsap.utils.toArray(".scroll-reveal").forEach((section) => {
+      section.classList.add("is-visible");
+      const revealTargets = section.querySelectorAll(
+        ":scope > :not(.cinematic-word):not(.product-service-list):not(.product-mega-title), .signal-timeline > div, .company-stat-grid > div, .company-note-grid article, .method-grid article, .proof-grid article, .faq-list details"
+      );
+      const productTitle = section.querySelector(".product-mega-title");
+      const productRows = section.querySelectorAll(".product-service-row");
+      const word = section.querySelector(".cinematic-word");
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 92%",
+          end: "bottom 8%",
+          scrub: 0.85,
+          invalidateOnRefresh: true
+        }
+      });
+
+      timeline
+        .fromTo(section, { autoAlpha: 0.18, y: 90, scale: 0.982 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.28, ease: "none" }, 0)
+        .fromTo(revealTargets, { autoAlpha: 0, y: 64, filter: "blur(18px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", stagger: 0.025, duration: 0.28, ease: "none" }, 0.04)
+        .fromTo(productTitle, { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 0.28, ease: "none" }, 0.02)
+        .fromTo(productRows, { autoAlpha: 0, y: 58 }, { autoAlpha: 1, y: 0, stagger: 0.035, duration: 0.3, ease: "none" }, 0.06)
+        .to(section, { autoAlpha: 1, y: 0, scale: 1, duration: 0.42, ease: "none" }, 0.34)
+        .to(revealTargets, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: "none" }, 0.34)
+        .to(productTitle, { autoAlpha: 1, y: 0, duration: 0.42, ease: "none" }, 0.34)
+        .to(productRows, { autoAlpha: 1, y: 0, duration: 0.42, ease: "none" }, 0.34)
+        .to(revealTargets, { autoAlpha: 0, y: -70, filter: "blur(16px)", stagger: 0.012, duration: 0.24, ease: "none" }, 0.76)
+        .to(productTitle, { autoAlpha: 0, y: -46, duration: 0.24, ease: "none" }, 0.76)
+        .to(productRows, { autoAlpha: 0, y: -56, stagger: 0.01, duration: 0.24, ease: "none" }, 0.76)
+        .to(section, { autoAlpha: 0.16, y: -86, scale: 0.986, duration: 0.22, ease: "none" }, 0.78);
+
+      if (word) {
+        timeline.fromTo(word, { xPercent: -6, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 0.7, duration: 0.32, ease: "none" }, 0)
+          .to(word, { xPercent: 7, autoAlpha: 0, duration: 0.24, ease: "none" }, 0.76);
+      }
+    });
+
+    ScrollTrigger.matchMedia({
+      "(min-width: 1024px)": () => {
+        const labVisual = document.querySelector(".signal-lab-visual");
+        if (!labVisual) return undefined;
+        const trigger = ScrollTrigger.create({
+          trigger: ".signal-lab",
+          start: "top 12%",
+          end: "bottom 72%",
+          pin: labVisual,
+          pinSpacing: false,
+          anticipatePin: 1
+        });
+        return () => trigger.kill();
+      }
+    });
+
+    gsap.fromTo(".footer-mega-word",
+      { autoAlpha: 0, xPercent: 10, yPercent: 10 },
+      {
+        autoAlpha: 1,
+        xPercent: 0,
+        yPercent: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".site-footer",
+          start: "top 92%",
+          end: "bottom bottom",
+          scrub: 0.8
+        }
+      }
+    );
+  });
+
+  document.addEventListener("astro:before-swap", () => {
+    gsapContext.revert();
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  });
+}
+
 document.querySelectorAll("[data-spotlight]").forEach((panel) => {
   panel.addEventListener("pointermove", (event) => {
     const rect = panel.getBoundingClientRect();
@@ -130,18 +366,6 @@ document.querySelectorAll("[data-spotlight]").forEach((panel) => {
 });
 
 const revealItems = document.querySelectorAll(".scroll-reveal");
-if (revealItems.length) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-      }
-    });
-  }, { threshold: 0.16 });
-
-  revealItems.forEach((item) => observer.observe(item));
-  document.addEventListener("astro:before-swap", () => observer.disconnect());
-}
 
 const syncScrollMotion = () => {
   const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
@@ -165,7 +389,7 @@ document.addEventListener("astro:before-swap", () => {
   window.removeEventListener("resize", syncScrollMotion);
 });
 
-document.querySelectorAll(".pill-button, .ghost-button, .product-tabs a, .method-grid article, .company-note-grid article, .signal-chip").forEach((item) => {
+document.querySelectorAll(".pill-button, .ghost-button, .method-grid article, .company-note-grid article, .signal-chip").forEach((item) => {
   item.classList.add("magnetic");
   item.addEventListener("pointermove", (event) => {
     const rect = item.getBoundingClientRect();
@@ -177,6 +401,34 @@ document.querySelectorAll(".pill-button, .ghost-button, .product-tabs a, .method
   item.addEventListener("pointerleave", () => {
     item.style.setProperty("--magnet-x", "0px");
     item.style.setProperty("--magnet-y", "0px");
+  });
+});
+
+document.querySelectorAll("[data-product-showcase]").forEach((showcase) => {
+  const rows = showcase.querySelectorAll("[data-product-row]");
+  rows.forEach((row) => {
+    let animationTimer = 0;
+    const setActive = (event) => {
+      const rect = row.getBoundingClientRect();
+      const enterFromRight = event?.clientX > rect.left + rect.width / 2;
+      row.style.setProperty("--title-enter-x", enterFromRight ? "0.62em" : "-0.62em");
+      rows.forEach((item) => item.classList.toggle("is-active", item === row));
+      row.classList.remove("is-animating");
+      void row.offsetWidth;
+      row.classList.add("is-animating");
+      window.clearTimeout(animationTimer);
+      animationTimer = window.setTimeout(() => {
+        row.classList.remove("is-animating");
+      }, 620 + row.querySelectorAll(".product-title-letter").length * 22 + 80);
+    };
+
+    row.addEventListener("pointerenter", setActive);
+    row.addEventListener("focus", setActive);
+    row.addEventListener("pointermove", (event) => {
+      const rect = showcase.getBoundingClientRect();
+      showcase.style.setProperty("--mx", `${((event.clientX - rect.left) / rect.width) * 100}%`);
+      showcase.style.setProperty("--my", `${((event.clientY - rect.top) / rect.height) * 100}%`);
+    });
   });
 });
 

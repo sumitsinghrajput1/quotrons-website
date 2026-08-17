@@ -38,6 +38,18 @@ const products = [
       "Designed for daily judgment",
       "Fast answers without the clutter"
     ]
+  },
+  {
+    number: "04",
+    title: "Growth intelligence",
+    headline: "Put marketing money where attention is already moving.",
+    copy:
+      "Campaigns, audience signals, and revenue feedback become one calm system for sharper growth.",
+    points: [
+      "Channel signals in one view",
+      "Marketing spend with intent",
+      "Revenue feedback loops"
+    ]
   }
 ];
 
@@ -55,28 +67,26 @@ const questions = [
 
 const stats = [
   ["01", "Core intelligence"],
-  ["03", "Everyday lenses"],
+  ["04", "Everyday lenses"],
   ["∞", "Rolling moves"]
 ];
 
-const companyStats = [
-  ["04", "people building the company"],
-  ["₹100 cr", "revenue generated last year"],
-  ["01", "focused marketing engine"]
-];
-
-const companyNotes = [
+const companyRoots = [
   [
     "Small team, sharp ownership",
-    "Quatrons is run by four people who keep product, growth, operations, and customer learning close to the same table."
+    "Four builders keep product, growth, operations, and customer learning close enough to move in one rhythm."
   ],
   [
     "Marketing as a growth system",
-    "The company invests deliberately in marketing so the product reaches people who already feel the pain of scattered decisions."
+    "Capital goes into attention loops that teach the product where demand is already forming."
   ],
   [
     "Revenue with a clear signal",
-    "Last year, Quatrons generated ₹100 crore in revenue by keeping the product simple, useful, and easy to explain."
+    "Revenue is treated as proof of clarity: people understand the promise, use it, and return."
+  ],
+  [
+    "Decision memory",
+    "Every lens compounds from previous choices, making the next answer calmer and more personal."
   ]
 ];
 ---
@@ -103,12 +113,22 @@ const companyNotes = [
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <title>Quatrons | Make Your Next Move Obvious</title>
   </head>
   <body>
+    <div class="splash-screen" aria-hidden="true" data-splash-screen>
+      <div class="splash-mark">
+        <span class="splash-symbol">Q</span>
+        <span class="splash-word" aria-hidden="true">
+          {"Quatrons".split("").map((letter) => <span class="splash-letter">{letter}</span>)}
+        </span>
+        <b class="splash-loader"><i></i></b>
+      </div>
+    </div>
+
     <div class="page-shell">
       <header class="site-header" aria-label="Primary navigation">
         <nav class="site-nav">
@@ -119,8 +139,8 @@ const companyNotes = [
             </a>
             <div class="nav-links" aria-label="Site sections">
               <a href="#products">Products</a>
-              <a href="#signal-lab">Signal lab</a>
               <a href="#company">Company</a>
+              <a href="#signal-lab">Signal lab</a>
               <a href="#method">Method</a>
               <a href="#faq">FAQ</a>
             </div>
@@ -139,8 +159,8 @@ const companyNotes = [
         <div class="mobile-menu" aria-hidden="true">
           <div class="mobile-menu-links">
             <a href="#products">Products</a>
-            <a href="#signal-lab">Signal lab</a>
             <a href="#company">Company</a>
+            <a href="#signal-lab">Signal lab</a>
             <a href="#method">Method</a>
             <a href="#faq">FAQ</a>
           </div>
@@ -154,8 +174,8 @@ const companyNotes = [
       <nav class="scroll-rail" aria-label="Page progress">
         <a href="#top" data-scroll-link="top"><span></span>Hero</a>
         <a href="#products" data-scroll-link="products"><span></span>Products</a>
-        <a href="#signal-lab" data-scroll-link="signal-lab"><span></span>Signal lab</a>
         <a href="#company" data-scroll-link="company"><span></span>Company</a>
+        <a href="#signal-lab" data-scroll-link="signal-lab"><span></span>Signal lab</a>
         <a href="#method" data-scroll-link="method"><span></span>Method</a>
       </nav>
 
@@ -233,64 +253,101 @@ const companyNotes = [
           </div>
         </section>
 
-        <div class="ticker" aria-label="Quatrons signal categories">
-          <span>Built for people who move with intent</span>
-          <span>Style</span>
-          <span>Markets</span>
-          <span>Conversation</span>
-          <span>Context</span>
-        </div>
-
-        <section class="split-intro scroll-reveal" id="products" aria-labelledby="products-title">
-          <div class="section-guide" aria-hidden="true"><span>01</span><b>Products</b></div>
-          <p class="eyebrow">One intelligence layer</p>
-          <h2 id="products-title">Different signals. One clear direction.</h2>
-          <p>
-            Most people stitch together four apps to make one decision. Quatrons replaces the
-            stitching with a living system that learns how you think.
-          </p>
-        </section>
-
-        <section class="product-panel interactive-spotlight scroll-reveal" aria-label="Quatrons intelligence products" data-spotlight>
-          <div class="product-copy">
-            <span class="step-count">01 / 03</span>
-            <p class="eyebrow">Style intelligence</p>
-            <h3>{products[0].headline}</h3>
-            <p>{products[0].copy}</p>
-            <ul>
-              {products[0].points.map((point) => <li>{point}</li>)}
-            </ul>
-          </div>
-          <div class="product-visual">
-            <div class="app-window">
-              <div class="window-bar">
-                <span></span>
-                <span></span>
-                <span></span>
-                <small>quatrons / visual try-on</small>
-              </div>
-              <p>Visual try-on</p>
-              <strong>98.4%</strong>
-              <small>match confidence</small>
-              <div class="swatch-row">
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-          </div>
-          <div class="product-tabs" role="list" aria-label="Product lenses">
-            {products.map((product) => (
-              <a role="listitem" href="#products">
-                <span>{product.number}</span>
-                {product.title}
-                <b aria-hidden="true">↗</b>
+        <section class="product-showcase scroll-reveal" id="products" aria-labelledby="products-title" data-product-showcase>
+          <h2 class="product-mega-title" id="products-title">Lenses</h2>
+          <div class="product-service-list" aria-label="Quatrons intelligence products">
+            {products.map((product, index) => (
+              <a
+                class:list={["product-service-row", index === 0 && "is-active"]}
+                href="#signal-lab"
+                data-product-row
+              >
+                <span class="product-service-number">{product.number}</span>
+                <strong class="product-service-title" aria-label={product.title}>
+                  {Array.from(product.title).map((letter, letterIndex) => (
+                    <span
+                      class="product-title-letter"
+                      style={`--letter-index: ${letterIndex};`}
+                      aria-hidden="true"
+                    >
+                      {letter === " " ? "\u00A0" : letter}
+                    </span>
+                  ))}
+                </strong>
+                <span class="product-service-copy">
+                  {product.copy}
+                  <span class="product-service-tags">
+                    {product.points.map((point) => <em>{point}</em>)}
+                  </span>
+                </span>
               </a>
             ))}
           </div>
         </section>
 
+        <section class="company-story company-game" id="company" aria-labelledby="company-title" data-company-game>
+          <div class="company-game-stage">
+            <div class="company-game-intro">
+              <h2 id="company-title" aria-label="Four people. One focused engine.">
+                <span class="company-intro-phrase">Four people.</span>
+                <span class="company-intro-phrase">One focused engine.</span>
+              </h2>
+            </div>
+
+            <div class="company-core" aria-label="Quatrons company system">
+              <a class="company-core-word" href="#top">Quatrons</a>
+              <svg class="company-roots-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <path class="root-line root-line-a" pathLength="1" d="M50 50 C38 43 25 35 11 23"></path>
+                <path class="root-line root-line-b" pathLength="1" d="M50 50 C62 41 75 34 91 24"></path>
+                <path class="root-line root-line-c" pathLength="1" d="M50 50 C36 60 24 70 10 82"></path>
+                <path class="root-line root-line-d" pathLength="1" d="M50 50 C64 62 76 72 91 84"></path>
+              </svg>
+
+              <div class="company-root root-a">
+                <span>01</span>
+                <strong>{companyRoots[0][0]}</strong>
+                <p>{companyRoots[0][1]}</p>
+              </div>
+              <div class="company-root root-b">
+                <span>02</span>
+                <strong>{companyRoots[1][0]}</strong>
+                <p>{companyRoots[1][1]}</p>
+              </div>
+              <div class="company-root root-c">
+                <span>03</span>
+                <strong>{companyRoots[2][0]}</strong>
+                <p>{companyRoots[2][1]}</p>
+              </div>
+              <div class="company-root root-d">
+                <span>04</span>
+                <strong>{companyRoots[3][0]}</strong>
+                <p>{companyRoots[3][1]}</p>
+              </div>
+            </div>
+
+            <div class="company-game-proof" aria-label="Company proof">
+              <dl>
+                <div>
+                  <dt>₹100 cr</dt>
+                  <dd>revenue generated last year</dd>
+                </div>
+                <div>
+                  <dt>01</dt>
+                  <dd>focused marketing engine</dd>
+                </div>
+              </dl>
+              <p>
+                Quatrons is a compact company built by four people, designed around fast
+                decisions, clear ownership, and a marketing engine that turns attention into
+                measurable growth.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <section class="signal-lab interactive-spotlight scroll-reveal" id="signal-lab" aria-labelledby="signal-lab-title" data-spotlight>
-          <div class="section-guide" aria-hidden="true"><span>02</span><b>Signal lab</b></div>
+          <span class="cinematic-word" aria-hidden="true">MAP</span>
+          <div class="section-guide" aria-hidden="true"><span>03</span><b>Signal lab</b></div>
           <div class="signal-lab-copy">
             <p class="eyebrow">Interactive signal lab</p>
             <h2 id="signal-lab-title">Move through the map. Watch the signal answer.</h2>
@@ -331,37 +388,8 @@ const companyNotes = [
           </div>
         </section>
 
-        <section class="company-story interactive-spotlight scroll-reveal" id="company" aria-labelledby="company-title" data-spotlight>
-          <div class="section-guide" aria-hidden="true"><span>03</span><b>Company</b></div>
-          <div class="company-story-copy">
-            <p class="eyebrow">Company signal</p>
-            <h2 id="company-title">Four people. One focused engine.</h2>
-            <p>
-              Quatrons is a compact company built by four people, designed around fast
-              decisions, clear ownership, and a marketing engine that turns attention into
-              measurable growth.
-            </p>
-          </div>
-          <dl class="company-stat-grid" aria-label="Company highlights">
-            {companyStats.map(([value, label]) => (
-              <div>
-                <dt>{value}</dt>
-                <dd>{label}</dd>
-              </div>
-            ))}
-          </dl>
-          <div class="company-note-grid">
-            {companyNotes.map(([title, copy], index) => (
-              <article>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
         <section class="method scroll-reveal" id="method" aria-labelledby="method-title">
+          <span class="cinematic-word" aria-hidden="true">SHIFT</span>
           <div class="section-guide" aria-hidden="true"><span>04</span><b>Method</b></div>
           <p class="eyebrow">The Quatrons method</p>
           <h2 id="method-title">From signal to shift.</h2>
@@ -381,6 +409,7 @@ const companyNotes = [
         </section>
 
         <section class="quote-band cta-panel-section scroll-reveal" aria-labelledby="build-title">
+          <span class="cinematic-word" aria-hidden="true">BUILD</span>
           <div class="section-guide" aria-hidden="true"><span>05</span><b>Build</b></div>
           <div class="build-cta interactive-spotlight" data-spotlight>
             <div class="build-spotlight" aria-hidden="true"></div>
@@ -414,6 +443,7 @@ const companyNotes = [
         </section>
 
         <section class="proof scroll-reveal" aria-labelledby="proof-title">
+          <span class="cinematic-word" aria-hidden="true">PROOF</span>
           <h2 id="proof-title">Already making better moves.</h2>
           <div class="proof-grid">
             <article>
@@ -432,6 +462,7 @@ const companyNotes = [
         </section>
 
         <section class="faq scroll-reveal" id="faq" aria-labelledby="faq-title">
+          <span class="cinematic-word" aria-hidden="true">ASK</span>
           <h2 id="faq-title">Good questions. Straight answers.</h2>
           <div class="faq-list">
             {questions.map(([question, answer]) => (
@@ -453,6 +484,7 @@ const companyNotes = [
         </section>
 
         <footer class="site-footer" aria-label="Footer">
+          <span class="footer-mega-word" aria-hidden="true">Quatrons</span>
           <div class="footer-wave" aria-hidden="true">
             <canvas class="wave-canvas" data-wave-canvas></canvas>
           </div>
@@ -479,8 +511,8 @@ const companyNotes = [
                 <h3>Product</h3>
                 <ul>
                   <li><a href="#products">Products</a></li>
-                  <li><a href="#signal-lab">Signal lab</a></li>
                   <li><a href="#company">Company</a></li>
+                  <li><a href="#signal-lab">Signal lab</a></li>
                   <li><a href="#method">Method</a></li>
                   <li><a href="#faq">FAQ</a></li>
                   <li><a href="mailto:hello@quatrons.com">Early access</a></li>
