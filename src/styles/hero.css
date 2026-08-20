@@ -80,7 +80,8 @@
   height: 80px;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.5rem;
+  gap: 1rem;
+  padding: 0 clamp(1rem, 3vw, 2rem);
   transition: all 500ms ease;
 }
 
@@ -266,7 +267,7 @@
   z-index: -1;
   display: flex;
   flex-direction: column;
-  padding: 7rem 2rem 2rem;
+  padding: 7rem clamp(1rem, 5vw, 2rem) 2rem;
   background: var(--hero-bg);
   opacity: 0;
   pointer-events: none;
@@ -288,26 +289,27 @@
 
 .mobile-menu-links a {
   color: var(--hero-ink);
-  font-size: clamp(3rem, 14vw, 5rem);
+  font-size: clamp(2.25rem, 10vw, 4rem);
   line-height: 0.95;
   text-decoration: none;
 }
 
 .mobile-menu-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   padding-top: 2rem;
   border-top: 1px solid var(--hero-border);
 }
 
 .mobile-menu-actions a {
-  flex: 1 1 0;
+  flex: 1 1 12rem;
 }
 
 .hero {
   position: relative;
   display: flex;
-  min-height: 100vh;
+  min-height: 100svh;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
@@ -333,8 +335,8 @@
   top: 50%;
   right: 0;
   z-index: 1;
-  width: 600px;
-  height: 600px;
+  width: min(48vw, 600px);
+  height: min(48vw, 600px);
   opacity: 0.4;
   pointer-events: auto;
   transform: translateY(-50%);
@@ -342,8 +344,8 @@
 
 @media (min-width: 1024px) {
   .signal-stage {
-    width: 800px;
-    height: 800px;
+    width: min(52vw, 800px);
+    height: min(52vw, 800px);
   }
 }
 
@@ -365,7 +367,7 @@
   z-index: 2;
   width: min(100%, 1400px);
   margin: 0 auto;
-  padding: 8rem 1.5rem 9rem;
+  padding: 8rem clamp(1rem, 4vw, 3rem) 9rem;
 }
 
 .motion-guide {
@@ -445,7 +447,7 @@
   margin: 0 0 3rem;
   color: var(--hero-ink);
   font-family: "Instrument Sans", Inter, ui-sans-serif, system-ui, sans-serif;
-  font-size: clamp(3rem, 8.4vw, 8.4rem);
+  font-size: clamp(2.4rem, 5.2vw, 5.6rem);
   font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 0.94;
@@ -512,7 +514,7 @@
   max-width: 36rem;
   margin: 0;
   color: var(--hero-muted);
-  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-size: clamp(1.05rem, 1.45vw, 1.25rem);
   line-height: 1.7;
   opacity: 0;
   transform: translateY(1rem);
@@ -610,7 +612,7 @@
 .hero-stats-group dt {
   margin: 0;
   color: var(--hero-ink);
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-size: clamp(1.9rem, 3vw, 2.75rem);
   font-weight: 400;
   letter-spacing: 0;
 }
@@ -661,7 +663,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .site-header .nav-links,
   .header-actions {
     display: flex;
@@ -670,6 +672,20 @@
   .mobile-menu-toggle,
   .mobile-menu {
     display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-copy h1 {
+    font-size: clamp(3rem, 8.2vw, 8.4rem);
+  }
+
+  .hero-row .lede {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+  }
+
+  .hero-stats-group dt {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
   }
 }
 
@@ -697,6 +713,50 @@
   }
 }
 
+@media (max-width: 767px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .mobile-menu-links {
+    justify-content: flex-start;
+    padding-top: 5vh;
+  }
+
+  .mobile-menu-links a {
+    font-size: clamp(2rem, 10vw, 3.35rem);
+  }
+
+  .hero-copy .eyebrow {
+    max-width: 100%;
+    font-size: 0.78rem;
+  }
+
+  .hero-copy h1 .line {
+    overflow-wrap: anywhere;
+  }
+
+  .hero-row .lede {
+    font-size: clamp(1rem, 4vw, 1.12rem);
+    line-height: 1.55;
+  }
+
+  .hero-stats-marquee {
+    position: relative;
+    bottom: auto;
+    margin: 0 0 2rem;
+  }
+
+  .hero-stats-track,
+  .hero-stats-group {
+    gap: 2rem;
+  }
+
+  .hero-stats-group > div {
+    gap: 0.7rem;
+  }
+}
+
 @media (max-width: 560px) {
   .site-header.is-scrolled {
     top: 0.75rem;
@@ -705,7 +765,12 @@
   }
 
   .hero-copy h1 {
-    font-size: clamp(3.15rem, 15vw, 5rem);
+    font-size: clamp(2.25rem, 11.5vw, 3.55rem);
+  }
+
+  .hero-copy {
+    padding-top: 8.25rem;
+    padding-bottom: 2rem;
   }
 
   .hero-actions,

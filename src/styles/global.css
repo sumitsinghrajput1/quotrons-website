@@ -130,7 +130,7 @@ a {
 .proof,
 .faq,
 .final-cta {
-  width: min(100% - 2rem, 1440px);
+  width: min(100% - clamp(1.25rem, 4vw, 4rem), 1440px);
   margin-right: auto;
   margin-left: auto;
 }
@@ -239,9 +239,10 @@ p {
 h1,
 h2 {
   max-width: 12ch;
-  font-size: clamp(4.2rem, 8vw, 8.6rem);
+  font-size: clamp(2.3rem, 4.6vw, 5.4rem);
   line-height: 0.88;
   letter-spacing: 0;
+  overflow-wrap: break-word;
 }
 
 h1 {
@@ -284,7 +285,7 @@ h1::first-line,
 
 .ticker {
   display: grid;
-  grid-template-columns: 1fr repeat(4, auto);
+  grid-template-columns: minmax(0, 1fr) repeat(4, auto);
   gap: 2rem;
   align-items: center;
   padding: 1.25rem 0;
@@ -464,7 +465,7 @@ h1::first-line,
 }
 
 .split-intro h2 {
-  font-size: clamp(3.6rem, 6vw, 6.6rem);
+  font-size: clamp(2.25rem, 4vw, 4.6rem);
 }
 
 .split-intro > p:last-child {
@@ -499,7 +500,7 @@ h1::first-line,
 
 .product-copy h3 {
   max-width: 12ch;
-  font-size: clamp(2.2rem, 4vw, 4.6rem);
+  font-size: clamp(1.8rem, 2.8vw, 3.2rem);
   line-height: 0.95;
   letter-spacing: 0;
 }
@@ -568,7 +569,7 @@ h1::first-line,
 .app-window strong {
   display: block;
   margin: 0.7rem 0 0.35rem;
-  font-size: 4rem;
+  font-size: 2.8rem;
   line-height: 1;
   font-weight: 400;
 }
@@ -604,6 +605,7 @@ h1::first-line,
   border-right: 1px solid var(--line);
   color: var(--muted);
   font-weight: 700;
+  min-width: 0;
 }
 
 .product-tabs a:first-child {
@@ -645,7 +647,7 @@ h1::first-line,
 .signal-lab h2 {
   max-width: 11ch;
   margin-bottom: 2rem;
-  font-size: clamp(3.1rem, 5.4vw, 6.2rem);
+  font-size: clamp(2.25rem, 3.6vw, 4.3rem);
   line-height: 0.94;
   text-decoration: none;
 }
@@ -733,7 +735,7 @@ h1::first-line,
   display: block;
   margin: 0.35rem 0;
   color: var(--text);
-  font-size: 3rem;
+  font-size: 2.15rem;
   font-weight: 400;
   line-height: 1;
 }
@@ -798,7 +800,7 @@ h1::first-line,
 .company-story h2 {
   max-width: 11ch;
   margin: 0;
-  font-size: clamp(3.2rem, 6vw, 6.8rem);
+  font-size: clamp(2.25rem, 4vw, 4.7rem);
   line-height: 0.92;
   text-decoration: none;
 }
@@ -831,7 +833,7 @@ h1::first-line,
 .company-stat-grid dt {
   margin: 0 0 1.2rem;
   color: var(--text);
-  font-size: clamp(2.6rem, 5vw, 5.5rem);
+  font-size: clamp(2rem, 3.3vw, 3.6rem);
   font-weight: 400;
   line-height: 0.95;
   letter-spacing: -0.01em;
@@ -980,7 +982,7 @@ h1::first-line,
   margin: 0 0 2rem;
   color: var(--text);
   font-family: "Instrument Sans", Inter, ui-sans-serif, system-ui, sans-serif;
-  font-size: clamp(3.5rem, 5.2vw, 6rem);
+  font-size: clamp(2.25rem, 3.5vw, 4.1rem);
   font-weight: 400;
   line-height: 0.95;
   letter-spacing: -0.01em;
@@ -1018,9 +1020,9 @@ h1::first-line,
 
 .build-visual {
   display: flex;
-  width: 500px;
-  height: 500px;
-  flex: 0 0 500px;
+  width: clamp(18rem, 34vw, 31.25rem);
+  height: clamp(18rem, 34vw, 31.25rem);
+  flex: 0 0 clamp(18rem, 34vw, 31.25rem);
   align-items: center;
   justify-content: center;
   margin-right: -4rem;
@@ -1064,7 +1066,7 @@ h1::first-line,
 .proof h2 {
   margin-right: auto;
   margin-left: auto;
-  font-size: clamp(3rem, 4.8vw, 5.4rem);
+  font-size: clamp(2.15rem, 3.2vw, 3.8rem);
 }
 
 .proof-grid {
@@ -1094,7 +1096,7 @@ h1::first-line,
 }
 
 .faq h2 {
-  font-size: clamp(2.8rem, 4.8vw, 5rem);
+  font-size: clamp(2.05rem, 3.2vw, 3.6rem);
 }
 
 .faq-list {
@@ -1137,7 +1139,7 @@ details[open] summary::after {
 }
 
 .final-cta h2 {
-  font-size: clamp(3.2rem, 6vw, 6.5rem);
+  font-size: clamp(2.15rem, 4vw, 4.4rem);
 }
 
 .site-footer {
@@ -1328,29 +1330,25 @@ details[open] summary::after {
   display: inline-flex;
   align-items: center;
   gap: 0;
-  width: 9.4rem;
-  height: 3rem;
-  padding: 0.35rem;
-  border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+  width: 8.4rem;
+  height: 2.65rem;
+  padding: 0.25rem;
+  border: 1px solid var(--line);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--bg) 74%, #232534);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, #ffffff 10%, transparent),
-    0 12px 28px rgba(0, 0, 0, 0.18);
+  background: color-mix(in srgb, var(--panel) 72%, transparent);
+  box-shadow: none;
 }
 
 .theme-toggle-thumb {
   position: absolute;
-  top: 0.35rem;
-  left: 0.35rem;
+  top: 0.25rem;
+  left: 0.25rem;
   z-index: 0;
-  width: calc((100% - 0.7rem) / 3);
-  height: calc(100% - 0.7rem);
+  width: calc((100% - 0.5rem) / 3);
+  height: calc(100% - 0.5rem);
   border-radius: 50%;
-  background: color-mix(in srgb, var(--text) 16%, #41506a);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, #ffffff 18%, transparent),
-    0 4px 12px rgba(0, 0, 0, 0.2);
+  background: var(--text);
+  box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.2);
   transition:
     transform 220ms ease,
     background 220ms ease;
@@ -1375,22 +1373,33 @@ details[open] summary::after {
   border: 0;
   border-radius: 999px;
   background: transparent;
-  color: color-mix(in srgb, var(--text) 80%, var(--muted));
+  color: var(--muted);
   cursor: pointer;
+  transition:
+    color 180ms ease,
+    opacity 180ms ease;
 }
 
 .theme-choice svg {
-  width: 1.45rem;
-  height: 1.45rem;
+  width: 1.1rem;
+  height: 1.1rem;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.75;
+  stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .theme-choice[aria-checked="true"] {
+  color: var(--bg);
+}
+
+.theme-choice:hover {
   color: var(--text);
+}
+
+.theme-choice[aria-checked="true"]:hover {
+  color: var(--bg);
 }
 
 .theme-choice:focus {
@@ -1398,28 +1407,15 @@ details[open] summary::after {
 }
 
 .theme-choice:focus-visible {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--text) 18%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--text) 22%, transparent);
 }
 
 :root[data-theme="light"] .theme-toggle {
-  background: #23232d;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-:root[data-theme="light"] .theme-choice {
-  color: rgba(255, 255, 255, 0.88);
-}
-
-:root[data-theme="light"] .theme-choice[aria-checked="true"] {
-  color: #ffffff;
-}
-
-:root[data-theme="light"] .theme-toggle-thumb {
-  background: #3f4b5f;
+  background: color-mix(in srgb, var(--panel-soft) 72%, transparent);
 }
 
 @media (max-width: 980px) {
-  .nav-links {
+  .site-header .nav-links {
     display: none;
   }
 
@@ -1432,7 +1428,7 @@ details[open] summary::after {
 
   .signal-lab-visual,
   .network-canvas {
-    min-height: 28rem;
+    min-height: clamp(22rem, 58vw, 28rem);
   }
 
   .signal-timeline {
@@ -1499,6 +1495,203 @@ details[open] summary::after {
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
+
+  .method-grid article:last-child,
+  .proof-grid article:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .ticker {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .section-guide {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .section-guide::before {
+    transform-origin: center;
+  }
+
+  .split-intro,
+  .signal-lab-copy,
+  .company-story-copy,
+  .product-copy,
+  .build-copy,
+  .final-cta {
+    text-align: center;
+  }
+
+  .split-intro h2,
+  .split-intro > p:last-child,
+  .signal-lab h2,
+  .signal-lab-copy > p:last-of-type,
+  .company-story h2,
+  .company-story-copy > p:last-child,
+  .product-copy h3,
+  .product-copy > p,
+  .build-copy h2,
+  .build-copy p,
+  .final-cta h2,
+  .final-cta > p {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .eyebrow,
+  .signal-lab-actions,
+  .build-actions {
+    justify-content: center;
+  }
+
+  .product-copy ul {
+    width: fit-content;
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+  }
+
+  .signal-timeline > div,
+  .company-stat-grid > div,
+  .company-note-grid article,
+  .method-grid article,
+  .proof-grid article {
+    text-align: center;
+  }
+
+  .company-stat-grid dd {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .footer-brand-column,
+  .footer-column {
+    text-align: center;
+  }
+
+  .footer-main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-brand,
+  .footer-brand-column p {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .footer-social,
+  .footer-column a,
+  .footer-bottom,
+  .footer-bottom-actions {
+    justify-content: center;
+  }
+
+  .footer-column ul {
+    justify-items: center;
+  }
+}
+
+@media (max-width: 1180px) and (min-width: 681px) {
+  .split-intro,
+  .signal-lab,
+  .company-story,
+  .method,
+  .proof,
+  .faq,
+  .final-cta {
+    padding: 6.5rem 0;
+  }
+
+  .product-panel,
+  .signal-lab,
+  .faq {
+    grid-template-columns: 1fr;
+  }
+
+  .product-copy {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .product-copy,
+  .product-visual {
+    min-height: auto;
+    padding: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .product-visual {
+    min-height: 26rem;
+  }
+
+  .signal-lab-visual,
+  .network-canvas {
+    min-height: 30rem;
+  }
+
+  .build-cta-inner {
+    min-height: 30rem;
+    padding: 3.5rem;
+  }
+
+  .build-visual {
+    margin-right: -6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  h1,
+  h2 {
+    font-size: clamp(3rem, 7.5vw, 8.6rem);
+  }
+
+  .split-intro h2 {
+    font-size: clamp(3.6rem, 6vw, 6.6rem);
+  }
+
+  .product-copy h3 {
+    font-size: clamp(2.2rem, 4vw, 4.6rem);
+  }
+
+  .app-window strong {
+    font-size: 4rem;
+  }
+
+  .signal-lab h2 {
+    font-size: clamp(3.1rem, 5.4vw, 6.2rem);
+  }
+
+  .signal-readout strong {
+    font-size: 3rem;
+  }
+
+  .company-story h2 {
+    font-size: clamp(3.2rem, 6vw, 6.8rem);
+  }
+
+  .company-stat-grid dt {
+    font-size: clamp(2.6rem, 5vw, 5.5rem);
+  }
+
+  .build-copy h2 {
+    font-size: clamp(3.5rem, 5.2vw, 6rem);
+  }
+
+  .proof h2 {
+    font-size: clamp(3rem, 4.8vw, 5.4rem);
+  }
+
+  .faq h2 {
+    font-size: clamp(2.8rem, 4.8vw, 5rem);
+  }
+
+  .final-cta h2 {
+    font-size: clamp(3.2rem, 6vw, 6.5rem);
+  }
 }
 
 @media (max-width: 680px) {
@@ -1514,12 +1707,18 @@ details[open] summary::after {
   }
 
   h2 {
-    font-size: clamp(3.5rem, 16vw, 5.2rem);
+    font-size: clamp(2.1rem, 9.5vw, 3.35rem);
+    line-height: 1;
   }
 
   .ticker {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.8rem;
+    font-size: 0.66rem;
+  }
+
+  .ticker span:first-child {
+    grid-column: 1 / -1;
   }
 
   .split-intro,
@@ -1529,7 +1728,15 @@ details[open] summary::after {
   .proof,
   .faq,
   .final-cta {
-    padding: 5rem 0;
+    padding: 4.5rem 0;
+  }
+
+  .section-guide {
+    margin-bottom: 1.4rem;
+  }
+
+  .section-guide::before {
+    width: 2rem;
   }
 
   .product-copy h3,
@@ -1541,13 +1748,89 @@ details[open] summary::after {
     max-width: 100%;
   }
 
+  .product-panel {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
+  .product-copy,
+  .product-visual,
+  .signal-timeline > div,
+  .company-stat-grid > div,
+  .company-note-grid article,
+  .method-grid article {
+    padding: 1.5rem;
+  }
+
+  .step-count {
+    margin-bottom: 2.25rem;
+  }
+
+  .product-copy h3 {
+    font-size: clamp(1.8rem, 8vw, 2.65rem);
+  }
+
+  .app-window {
+    width: 100%;
+    padding: 1.2rem;
+    transform: none;
+  }
+
+  .app-window strong {
+    font-size: clamp(2.4rem, 12vw, 3.2rem);
+  }
+
+  .product-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .product-tabs a {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .product-tabs a:last-child {
+    border-bottom: 0;
+  }
+
+  .signal-lab h2,
+  .company-story h2 {
+    max-width: 100%;
+    font-size: clamp(2rem, 9vw, 3.2rem);
+  }
+
+  .signal-lab-copy > p:last-of-type,
+  .company-story-copy > p:last-child {
+    font-size: 1rem;
+  }
+
+  .signal-readout {
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    min-width: 0;
+  }
+
+  .signal-readout strong {
+    font-size: 2rem;
+  }
+
+  .company-stat-grid dt {
+    font-size: clamp(2rem, 11vw, 3.1rem);
+  }
+
+  .method-grid {
+    margin-top: 3rem;
+  }
+
   .build-cta-inner {
     min-height: auto;
     padding: 2.5rem 1.5rem 3rem;
   }
 
   .build-copy h2 {
-    font-size: clamp(2.8rem, 13vw, 4.2rem);
+    font-size: clamp(2.1rem, 9.5vw, 3.2rem);
   }
 
   .build-copy p {
@@ -1561,5 +1844,41 @@ details[open] summary::after {
   .build-actions .pill-button.large,
   .build-actions .ghost-button {
     width: 100%;
+  }
+
+  .final-cta {
+    min-height: 28rem;
+  }
+
+  .footer-main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-brand-column {
+    grid-column: 1 / -1;
+  }
+
+  .footer-bottom,
+  .footer-bottom-actions {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .ticker {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-menu-actions,
+  .build-actions,
+  .hero-actions {
+    gap: 0.75rem;
+  }
+
+  .ghost-button,
+  .pill-button.large {
+    padding-right: 1rem;
+    padding-left: 1rem;
   }
 }
